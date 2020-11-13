@@ -1,0 +1,39 @@
+version : '3'
+
+services:
+
+  business :
+    container_name: api-calango
+    image: node:current
+    networks :
+      - base
+    ports:
+      - "3000:3030"
+    command: "yarn dev"
+    working_dir: /app
+    volumes :
+      - .:/app
+    environment:
+      NODE_ENV: "local"
+      PORT: 3000
+    env_file : .env
+    depends_on :
+      - db
+
+  db :
+    container_name: calango-mysql
+    image : mariadb:10
+    networks :
+      - base
+    ports :
+      - "3306:3306"
+    volumes :
+      - db-data:/var/lib/mysql
+    env_file :
+      - .env
+
+networks:
+  base:
+
+volumes:
+  db-data :

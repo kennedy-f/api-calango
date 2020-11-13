@@ -9,7 +9,7 @@ export default function (app: Application): void {
     host: process.env.MYSQL_HOST,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
-    logging: true,
+    logging: false,
     define: {
       freezeTableName: true
     }

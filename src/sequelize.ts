@@ -2,13 +2,13 @@ import { Sequelize } from 'sequelize';
 import { Application } from './declarations';
 
 export default function (app: Application): void {
-  const connectionString = app.get('mysql');
+  // const connectionString = app.get('mysql');
   const sequelize = new Sequelize({
     dialect: 'mysql',
-    username: process.env.MYSQL_USER,
-    host: process.env.MYSQL_HOST,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
+    username: process.env.MYSQL_USER || 'dev',
+    host: process.env.MYSQL_HOST || 'localhost',
+    password: process.env.MYSQL_PASSWORD || 'dev',
+    database: process.env.MYSQL_DATABASE|| 'calango',
     logging: false,
     define: {
       freezeTableName: true

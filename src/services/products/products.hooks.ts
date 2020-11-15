@@ -1,7 +1,8 @@
 
+import getRelations from '../../hooks/get-relations';
 export default {
   before: {
-    all: [],
+    all: [getRelations('product_images')],
     find: [],
     get: [],
     create: [],

@@ -33,7 +33,7 @@ export default function (app: Application): typeof Model {
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     productImages.belongsTo(models.products, {
       
-    })
+    });
   };
 
   return productImages;

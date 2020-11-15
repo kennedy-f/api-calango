@@ -5,11 +5,11 @@ describe('authentication', () => {
   it('registered the authentication service', () => {
     assert.ok(app.service('authentication'));
   });
-  
+
   describe('local strategy', () => {
     const userInfo = {
-      email: 'someone@example.com',
-      password: 'supersecret'
+      name: 'someone',
+      password: 'supersecret',
     };
 
     before(async () => {
@@ -21,13 +21,15 @@ describe('authentication', () => {
     });
 
     it('authenticates user and creates accessToken', async () => {
-      const { user, accessToken } = await app.service('authentication').create({
+      const { users, accessToken } = await app.service('authentication').create({
         strategy: 'local',
         ...userInfo
       }, {});
-      
+
       assert.ok(accessToken, 'Created access token for user');
-      assert.ok(user, 'Includes user in authentication data');
+      assert.ok(users, 'Includes user in authentication data');
+
+
     });
   });
 });

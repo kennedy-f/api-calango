@@ -1,6 +1,6 @@
 // See http://docs.sequelizejs.com/en/latest/docs/models-definition/
 // for more of what you can do here.
-import { Sequelize, DataTypes, Model, HasMany } from 'sequelize';
+import { Sequelize, DataTypes, Model } from 'sequelize';
 import { Application } from '../declarations';
 import { HookReturn } from 'sequelize/types/lib/hooks';
 
@@ -50,6 +50,7 @@ export default function (app: Application): typeof Model {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
 
+    models.products.hasMany(models.product_images);
   };
 
   return products;

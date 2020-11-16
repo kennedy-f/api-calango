@@ -3,33 +3,28 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Application } from "../declarations";
 import { HookReturn } from "sequelize/types/lib/hooks";
+import sequelize from "../sequelize";
 
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
-  const products = sequelizeClient.define(
-    "products",
+  const productCategory = sequelizeClient.define(
+    "product_category",
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      quantity: {
+      productId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      },
-      price: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-      },
-      categories: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      shopId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        primaryKey: true,
         references: {
-          model: "shop",
+          model: "products",
+          key: "id",
+        },
+      },
+      categoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: "categories",
           key: "id",
         },
       },
@@ -44,13 +39,11 @@ export default function (app: Application): typeof Model {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (products as any).associate = function (models: any): void {
+  (productCategory as any).associate = function (models: any): void {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
-    models.products.hasMany(models.product_images);
-    models.products.hasMany(models.product_category);
+    models.product_category.hasMany(models.categories, {});
   };
 
-  return products;
+  return productCategory;
 }

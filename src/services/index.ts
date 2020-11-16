@@ -5,7 +5,6 @@ import shop from './shop/shop.service';
 import users from './users/users.service';
 import productImages from './product-images/product-images.service';
 import categories from './categories/categories.service';
-import productCategory from './product-category/product-category.service';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -15,5 +14,4 @@ export default function (app: Application): void {
   app.configure(users);
   app.configure(productImages);
   app.configure(categories);
-  app.configure(productCategory);
 }

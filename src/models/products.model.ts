@@ -21,10 +21,6 @@ export default function (app: Application): typeof Model {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
-      categories: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       shopId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -47,9 +43,8 @@ export default function (app: Application): typeof Model {
   (products as any).associate = function (models: any): void {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
     models.products.hasMany(models.product_images);
-    models.products.hasMany(models.product_category);
+    models.products.belongsToMany(models.categories, { through : 'product_categories'});
   };
 
   return products;

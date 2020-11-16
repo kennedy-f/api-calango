@@ -1,14 +1,27 @@
-
-import getRelations from '../../hooks/get-relations';
+import getRelations from "../../hooks/get-relations";
 export default {
   before: {
-    all: [getRelations('product_images')],
+    all: [
+      getRelations([
+        {
+          association: "categories",
+          attributes: ["name"],
+          through: {
+            attributes: []
+          }
+        },
+        {
+          association: "product_images",
+          attributes: ["imageUrl"]
+        },
+      ]),
+    ],
     find: [],
     get: [],
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -18,7 +31,7 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -28,6 +41,6 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };
